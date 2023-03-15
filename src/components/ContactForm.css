@@ -1,0 +1,51 @@
+#form-component {
+  display: flex;
+  height: 100%;
+  width: 100%;
+
+  place-items: center;
+  place-content: center;
+
+  font-family: 'FredokaOne';
+}
+
+#form-container-border {
+  width: 40vw;
+  height: 60vh;
+}
+
+#form-container {
+height: 100%;
+width: 80%;
+margin: auto;
+
+background: rgba(255, 255, 255, 0.15);
+border-radius: 0.7em;
+}
+
+#form-background {
+  background: white;
+  opacity: 0.15;
+  border-radius: 0.7em;
+}
+
+@font-face {
+  font-family: 'FredokaOne';
+  font-style: normal;
+  font-weight: normal;
+  src: local('FredokaOne'), url('./assets/FredokaOne-Regular.ttf');
+}
+form {
+  display: flex;
+flex-direction: column;
+}
+
+input {font-family: 'FredokaOne';
+  height: 2em;
+  width: 50%;
+  margin: auto;
+}
+
+button {
+  width: 30%;
+}

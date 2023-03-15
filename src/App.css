@@ -1,38 +1,116 @@
-.App {
-  text-align: center;
+body {
+  background-color: rgb(20, 20, 20);
+  margin: 0px;
+  height: 100%;
+  width: 100%;
 }
 
-.App-logo {
-  height: 40vmin;
+#footer {
+  position: absolute;
+left: 50vmax;
+bottom: 2vmax;
+width: 2.5em;
+}
+
+
+@font-face {
+  font-family: 'FredokaOne';
+  font-style: normal;
+  font-weight: normal;
+  src: local('FredokaOne'), url('./assets/FredokaOne-Regular.ttf');
+}
+
+#menu-items {
+  margin-left: clamp(4rem, 20vw, 48rem);
+  position: relative;
+  z-index: 2;
+}
+
+#menu[data-active-index="0"] > #menu-background-image {
+  background-position: center 40%;
+}
+
+#menu[data-active-index="1"] > #menu-background-image {
+  background-position: center 50%;
+}
+
+#menu[data-active-index="2"] > #menu-background-image {
+  background-position: center 60%;
+}
+
+
+#menu-background-image {
+  background-image: url("/menu.jpg");
+  background-position: center 40%;
+  background-size: 110vmax;
+  height: 100%;
+  left: 0px;  
+  opacity: 0.15;
+  position: absolute;
+  top: 0px;
+  transition: opacity 800ms ease,
+    background-size 800ms ease,
+    background-position 800ms ease;
+  width: 100%;
+  z-index: 0;
+}
+
+#menu-items:hover ~ #menu-background-image {
+  background-size: 100vmax;
+  opacity: 0.1;
+}
+
+.inactive ~ #menu-background-image {
+  transition-delay:1s;
+}
+
+#menu-items:hover > .menu-item {
+  opacity: 0.5;
+}
+
+#menu-items:hover > .menu-item:hover {
+  opacity: 1; 
+}
+
+.menu-item {
+  cursor: pointer;
+  display: block;
+  font-family: 'FredokaOne', serif;
+  font-size: clamp(2rem, 5vw, 5rem);
+  padding: clamp(0.25rem, 0.5vw, 1rem) 0rem;
+  text-decoration: none;
+  transition: opacity 400ms ease;
+
+  overflow: hidden;
+}
+
+.inactive {
   pointer-events: none;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+p {
+  margin: 0;
+  top:0;
+  position: relative;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+p[data-hidden="true"] {
+  transition: all 0.7s ease-in;
+  top: -20vh;
 }
 
-.App-link {
-  color: #61dafb;
+.menu-item:nth-child(2) > p {
+  transition-delay: 100ms;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.menu-item:nth-child(3) > p {
+  transition-delay:200ms;
+}
+
+#router-container {
+  position: absolute;
+  height: 100vh;
+  width: 100vw;
+  z-index: 1;
+  bottom: 0px;
 }
