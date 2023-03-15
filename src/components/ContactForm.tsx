@@ -1,15 +1,11 @@
-import { createRef, useRef, useState } from 'react'
+import { type ReactElement } from 'react'
 import {
   Form, Link
-} from "react-router-dom";
-import LogoIcon from './assets/LogoIcon.svg';
+} from 'react-router-dom'
 
 import './ContactForm.css'
 
-
-function ContactForm() {
-
-
+function ContactForm (): ReactElement {
   return (
     <><div id="form-component">
         <div id="form-container-border">
@@ -26,4 +22,4 @@ function ContactForm() {
   )
 }
 
-export default ContactForm;
+export default ContactForm

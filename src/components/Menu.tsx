@@ -1,34 +1,48 @@
-import { createRef, useRef, useState } from 'react'
-import {
-  createBrowserRouter,
-  RouterProvider,
-  Link,
-  redirect
-} from "react-router-dom";
-import LogoIcon from './assets/LogoIcon.svg';
+import { type ReactElement, useRef, useState } from 'react'
+
+import { CSSTransition } from 'react-transition-group'
 
 import '../App.css'
 
-function Menu() {
-  const [activeElement, setActiveElement] = useState(0);
-  const [menuHidden, setMenuHidden] = useState(false);
-  
-  const clickMenuItem = (path: string):void => {
-    setMenuHidden(true);
-    redirect(path);
+interface MenuProps {
+  changeRoute: (arg0: string) => void
+  setActiveElement: (arg0: number) => void
+  setMenuItemSelected: (arg0: boolean) => void
+}
+
+function Menu (props: MenuProps): ReactElement {
+  const [menuHidden, setMenuHidden] = useState(false)
+  const [menuItemChosen, setMenuItemChosen] = useState('')
+
+  const menuItems = useRef(null)
+
+  const onMenuHidden = (path: string): void => {
+    props.changeRoute(path)
   }
+
+  const menuItemComponent = (label: string, href: string, index: number): ReactElement => {
+    const transitionRef = useRef(null)
+
+    return <div key={label} className="menu-item" onMouseLeave={() => { props.setMenuItemSelected(false) }}
+     onMouseOver={() => { props.setMenuItemSelected(true); props.setActiveElement(index) }} onClick={() => { setMenuItemChosen(href); setMenuHidden(true) }}>
+<CSSTransition key={label} nodeRef={transitionRef} in={menuHidden} timeout={1200} classNames="menu-item-p" onEntered={() => { if (index === 2) { onMenuHidden(menuItemChosen) } }}>
+    <p ref={transitionRef}>
+        {label}
+    </p>
+</CSSTransition>
+</div>
+  }
+  const menuItemArray = [
+    menuItemComponent('About', '/about', 0),
+    menuItemComponent('Projects', '/projects', 1),
+    menuItemComponent('Contact', '/contact', 2)
+  ]
 
   return (
     <>
-      <div id="menu" data-active-index={activeElement}>
-      <div id="menu-items" className={menuHidden ? 'inactive' : ''}>
-        <div className="menu-item" onMouseOver={()=> {setActiveElement(0)}} onClick={()=>{clickMenuItem('/contact')}}>
-          <p data-hidden={menuHidden}>About</p>
-        </div>
-        <div className="menu-item" onMouseOver={()=> {setActiveElement(1)}} onClick={()=>{setMenuHidden(true)}}>
-          <p data-hidden={menuHidden}>Projects</p></div>
-        <div className="menu-item" onMouseOver={()=> {setActiveElement(2)}} onClick={()=>{setMenuHidden(true)}}>
-          <p data-hidden={menuHidden}>Contact</p></div>
+      <div id="menu" className={menuHidden ? 'inactive' : ''}>
+      <div id="menu-items" ref={menuItems}>
+        {menuItemArray}
       </div>
     </div></>
   )
