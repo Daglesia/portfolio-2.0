@@ -6,12 +6,15 @@
   place-items: center;
   place-content: center;
 
-  font-family: 'FredokaOne';
+  position: relative;
+  z-index: 2;
 }
 
 #form-container-border {
   width: 40vw;
+  min-width: 20em;
   height: 60vh;
+  overflow:hidden;
 }
 
 #form-container {
@@ -19,8 +22,17 @@ height: 100%;
 width: 80%;
 margin: auto;
 
+display: flex;
+flex-direction: column;
+
 background: rgba(255, 255, 255, 0.15);
 border-radius: 0.7em;
+
+animation: 0.7s ease-out 0s 1 slideInFromLeft;
+}
+
+#name {
+  margin-bottom: 0.5em;
 }
 
 #form-background {
@@ -28,24 +40,59 @@ border-radius: 0.7em;
   opacity: 0.15;
   border-radius: 0.7em;
 }
-
-@font-face {
-  font-family: 'FredokaOne';
-  font-style: normal;
-  font-weight: normal;
-  src: local('FredokaOne'), url('./assets/FredokaOne-Regular.ttf');
-}
 form {
-  display: flex;
-flex-direction: column;
+  all: unset;
 }
 
-input {font-family: 'FredokaOne';
+h3 {
+  margin-bottom: 0;
+  margin-top: 0.5em;
+  margin-left: 0.6em;
+}
+
+input {
+  font-family: inherit;
   height: 2em;
   width: 50%;
-  margin: auto;
+  border-radius: 0.7em;
 }
 
-button {
+#form-button {
+  font-family: inherit;
   width: 30%;
+  margin: auto;
+  margin-bottom: auto;
+height: 2em;
+border-radius: 0.7em;
+margin-bottom: 0.3em;
+}
+
+textarea {
+  flex-grow:2;
+  margin: 0.5em;
+border-radius: 0.7em;
+resize: none;
+}
+
+.input-row {
+  display: flex;
+  gap: 1em;
+}
+
+label {
+  align-self: center;
+  margin-left:1em;
+}
+
+h1 {margin: 0;
+  text-align: center;
+  padding: 0.2em;}
+
+@keyframes slideInFromLeft {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
 }

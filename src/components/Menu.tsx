@@ -23,14 +23,14 @@ function Menu (props: MenuProps): ReactElement {
   const menuItemComponent = (label: string, href: string, index: number): ReactElement => {
     const transitionRef = useRef(null)
 
-    return <div key={label} className="menu-item" onMouseLeave={() => { props.setMenuItemSelected(false) }}
+    return <li key={label} className="menu-item" onMouseLeave={() => { props.setMenuItemSelected(false) }}
      onMouseOver={() => { props.setMenuItemSelected(true); props.setActiveElement(index) }} onClick={() => { setMenuItemChosen(href); setMenuHidden(true) }}>
 <CSSTransition key={label} nodeRef={transitionRef} in={menuHidden} timeout={1200} classNames="menu-item-p" onEntered={() => { if (index === 2) { onMenuHidden(menuItemChosen) } }}>
     <p ref={transitionRef}>
         {label}
     </p>
 </CSSTransition>
-</div>
+</li>
   }
   const menuItemArray = [
     menuItemComponent('About', '/about', 0),
@@ -40,11 +40,9 @@ function Menu (props: MenuProps): ReactElement {
 
   return (
     <>
-      <div id="menu" className={menuHidden ? 'inactive' : ''}>
-      <div id="menu-items" ref={menuItems}>
+      <ul id="menu-items" ref={menuItems} className={menuHidden ? 'inactive' : ''}>
         {menuItemArray}
-      </div>
-    </div></>
+      </ul></>
   )
 }
 

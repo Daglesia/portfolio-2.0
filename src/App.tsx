@@ -27,11 +27,11 @@ function App (): ReactElement {
   )
 
   return (
-    <><div id="app">
+    <>
       <RouterProvider router={router} />
-      <div id="menu-background-image" data-active-index={activeElement} data-active-hover={menuItemSelected}></div>
+      <img id="menu-background-image" data-active-index={activeElement} data-active-hover={menuItemSelected}></img>
       <img id="footer" src={LogoIcon}/>
-    </div></>
+    </>
   )
 }
 

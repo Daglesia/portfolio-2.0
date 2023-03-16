@@ -7,23 +7,19 @@ body {
 
 #footer {
   position: absolute;
-left: 50vmax;
-bottom: 2vmax;
+  left:0;
+  right:0;
+  margin-left:auto;
+  margin-right:auto;
+bottom: 1.5vmax;
 width: 2.5em;
-}
-
-
-@font-face {
-  font-family: 'FredokaOne';
-  font-style: normal;
-  font-weight: normal;
-  src: local('FredokaOne'), url('./assets/FredokaOne-Regular.ttf');
 }
 
 #menu-items {
   margin-left: clamp(4rem, 20vw, 48rem);
   position: relative;
   z-index: 2;
+  width: fit-content;
 }
 
 #menu-background-image[data-active-index="0"] {
@@ -45,7 +41,7 @@ width: 2.5em;
   background-size: 110vmax;
   height: 100%;
   left: 0px;  
-  opacity: 0.15;
+  opacity: 0.3;
   position: absolute;
   top: 0px;
   transition: opacity 800ms ease,
@@ -57,7 +53,7 @@ width: 2.5em;
 
 #menu-background-image[data-active-hover="true"] {
   background-size: 100vmax;
-  opacity: 0.1;
+  opacity: 0.2;
 }
 
 .inactive ~ #menu-background-image {
@@ -75,13 +71,30 @@ width: 2.5em;
 .menu-item {
   cursor: pointer;
   display: block;
-  font-family: 'FredokaOne', serif;
   font-size: clamp(2rem, 5vw, 5rem);
   padding: clamp(0.25rem, 0.5vw, 1rem) 0rem;
   text-decoration: none;
   transition: opacity 400ms ease;
 
   overflow: hidden;
+}
+
+@keyframes slideInFromBelow {
+  0% {
+    transform: translateY(20vh);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideOutFromAbove {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-20vh);
+  }
 }
 
 .inactive {
@@ -92,11 +105,12 @@ p {
   margin: 0;
   top:0;
   position: relative;
+  animation: 0.7s ease-out 0s 1 forwards slideInFromBelow;
 }
 
 p[data-hidden="true"] {
-  transition: all 0.7s ease-in;
-  top: -20vh;
+
+  animation: 0.7s ease-out 0s 1 forwards slideOutFromAbove;
 }
 
 .menu-item:nth-child(2) > p {
